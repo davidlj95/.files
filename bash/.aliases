@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Git aliases
+alias gcd="git checkout develop"
+alias gcm="git checkout master"
+alias gpf="git push --force-with-lease"
+
+# # Git flow
+alias gfli="git flow init"
+alias gflfs="git flow feature start"
+alias gflff="git flow feature finish"
+alias gflfp="git flow feature publish"
+
+# Clipboard
+alias clipcopy="xsel --clipboard"

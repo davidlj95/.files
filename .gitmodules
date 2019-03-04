@@ -1,0 +1,3 @@
+[submodule "bash-it"]
+	path = bash/.bash_it
+	url = https://github.com/Bash-it/bash-it
