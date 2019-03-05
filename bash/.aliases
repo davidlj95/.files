@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
-# Git aliases
+# Git
 alias gcd="git checkout develop"
 alias gcm="git checkout master"
 alias gpf="git push --force-with-lease"
+alias gst="git status"
+alias glog="git log"
+alias gca="git commit --all"
 
 # # Git flow
 alias gfli="git flow init"
@@ -12,3 +15,10 @@ alias gflfp="git flow feature publish"
 
 # Clipboard
 alias clipcopy="xsel --clipboard"
+
+# FASD
+alias v='f -e vim' # quick opening files with vim
+alias m='f -e mplayer' # quick opening files with mplayer
+alias o='a -e xdg-open' # quick opening files with xdg-open
+
+ 
