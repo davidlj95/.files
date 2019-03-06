@@ -50,5 +50,9 @@ stow -D <app>
 ```
 
 ## TODO:
+- [ ] VIM configs based on https://github.com/amix/vimrc
+- [ ] SSH configs import
+- [ ] Custom VIM configs
+- [ ] Autoenable `bash_it` aliases and plugins
 - [ ] Script to automatically install basic dotfiles (`basic.sh`)
 - [ ] Use [dotdrop](https://github.com/deadc0de6/dotdrop) for more configurations
