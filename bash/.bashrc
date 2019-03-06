@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+[ `uname -o` = "Cygwin" ] && chcp.com 65001 > /dev/null 2>&1
+
 # Path to the bash it configuration
 export BASH_IT="$HOME/.bash_it"
 
