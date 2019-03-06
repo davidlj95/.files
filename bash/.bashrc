@@ -58,5 +58,5 @@ export SCM_CHECK=true
 source "$BASH_IT"/bash_it.sh
 
 # Load aliases
-. "$HOME/.aliases"
 . "$HOME/.env"
+. "$HOME/.aliases"
