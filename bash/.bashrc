@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Cygwin UTF8
 [ `uname -o` = "Cygwin" ] && chcp.com 65001 > /dev/null 2>&1
 
 # Path to the bash it configuration
@@ -60,3 +61,7 @@ source "$BASH_IT"/bash_it.sh
 # Load aliases
 . "$HOME/.env"
 . "$HOME/.aliases"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/davidlj/.sdkman"
+[[ -s "/home/davidlj/.sdkman/bin/sdkman-init.sh" ]] && source "/home/davidlj/.sdkman/bin/sdkman-init.sh"

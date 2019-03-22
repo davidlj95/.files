@@ -21,6 +21,11 @@ alias v='f -e vim' # quick opening files with vim
 alias m='f -e mplayer' # quick opening files with mplayer
 alias o='a -e xdg-open' # quick opening files with xdg-open
 
+# LSD if available
+if command -v lsd > /dev/null 2>&1; then
+	alias ls=lsd
+fi
+
 # OS-Specific aliases
 if [ `uname -o` = "Cygwin" ] && [ -d "$NIRCMD_HOME" ]; then
 	alias sudo="$NIRCMD_COMMAND elevate cmd.exe /K "
