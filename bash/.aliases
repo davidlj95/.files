@@ -26,6 +26,15 @@ if command -v lsd > /dev/null 2>&1; then
 	alias ls=lsd
 fi
 
+# Music helpers
+alias c2s="playerctl -p spotify play && playerctl -p clementine stop"
+alias s2c="playerctl -p clementine play && playerctl -p spotify stop"
+alias mplay="playerctl play"
+alias mstart="mplay"
+alias mstop="playerctl stop"
+alias mvol="playerctl volume"
+alias mvolume="mvol"
+
 # OS-Specific aliases
 if [ `uname -o` = "Cygwin" ] && [ -d "$NIRCMD_HOME" ]; then
 	alias sudo="$NIRCMD_COMMAND elevate cmd.exe /K "
