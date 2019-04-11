@@ -1,0 +1,3 @@
+#!/bin/sh
+# vim: syntax=sh
+mplayer-loop "$(flaixfm-url)" "$@"
