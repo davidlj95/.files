@@ -1,0 +1,15 @@
+#!/bin/sh
+# vim: syntax=sh
+
+# dig is required
+if ! command -v dig > /dev/null 2>&1; then
+    echo dig command is not installed
+    echo Install the bind-tools package
+    exit 1
+fi
+
+# Google DNS
+dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d \"
+
+# OpenDNS (too much info)
+#dig TXT +short o-o.myaddr.l.google.com @resolver1.opendns.com
