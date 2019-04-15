@@ -4,4 +4,4 @@
 #     head -n 1 | cut -d\[ -f1 | awk '$1=$1')
 # 
 # [ -z "$loop_device" ] && (echo "Loopback card not found" && exit 1)
-mplayer -ao "alsa:device=loopin" "$@"
+mplayer -ao "alsa:device=MusicLoopInput" "$@"
