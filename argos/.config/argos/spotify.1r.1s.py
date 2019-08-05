@@ -81,7 +81,7 @@ if(isRunning("spotify")):
         print("Previous | iconName=media-skip-backward bash='dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous' terminal=false")
 
         # exit spotify
-        print("Exit Spotify | iconName=application-exit bash='python3 /home/simonc/.config/argos/.kill.py spotify' terminal=false")
+        print("Exit Spotify | iconName=application-exit bash='killall spotify' terminal=false")
 
     else:
         print("Nothing is playing | iconName=spotify")

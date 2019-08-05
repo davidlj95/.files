@@ -32,6 +32,7 @@ STATUS=$(echo "$DATA" | cut -d "|" -f2)
 function changeStatus {
     echo "$CURRENT_TIME|$1" > "$SAVE_LOCATION";
     notify-send -i process-stop "$TOMATO Pomodoro" "$2"
+    "$HOME/bin/alert-sound.sh"
 }
 
 function breakMode {
