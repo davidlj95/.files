@@ -1,0 +1,20 @@
+#!/bin/sh
+# 
+# Cuts the text to be displayed upon MAX_WIDTH of the screen
+# Centers the text if line width does not fit MAX_WIDTH
+#
+# Needs the unbuffer shell-util (stdbuf -oL command)
+#
+COLUMNS=40
+
+text=/dev/stdin
+
+# https://superuser.com/a/829870
+display_center() {
+    while IFS= read -r line; do
+        printf "%*s\n" $(( (${#line} + COLUMNS) / 2)) "$line"
+    done < "$1"
+}
+
+display_center $text | unbuffer cut -c1-$COLUMNS 
+

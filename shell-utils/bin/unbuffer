@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Unbuffers the command so that the output is immediately piped to the next
+# stream
+#
+# Example:
+# ping google.com | unbuffer cut -c1-80 > myfile.txt
+#
+# This way the file is updated on each ping
+stdbuf -oL $*
