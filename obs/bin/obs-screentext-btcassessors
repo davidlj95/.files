@@ -1,0 +1,5 @@
+#!/bin/sh
+# 
+# Same as obs-screentext but for BTCA
+#
+obs-screentext > ~/Documents/obs-btcassessors.txt

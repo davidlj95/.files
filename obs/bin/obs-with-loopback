@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo modprobe -r v4l2loopback 2>&1 /dev/null || true
+sudo modprobe -r v4l2loopback > /dev/null 2>&1 || true
 sudo modprobe v4l2loopback card_label="OBS Studio" exclusive_caps=1 
 obs
 sudo modprobe -r v4l2loopback

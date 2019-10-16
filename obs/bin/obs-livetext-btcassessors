@@ -1,0 +1,13 @@
+#!/bin/sh
+REFRESH_PERIOD=1
+
+while true; do
+    clear
+    first_line="@davidlj95, Spain"
+    second_line=$(LC_TIME=es_ES.UTF-8 TZ=America/Lima date "+%A, %d de %B de %Y")
+    third_line="$(TZ=America/Lima date "+%H:%M:%S")        Lima, Peru"
+    fourth_line="$(TZ=Europe/Madrid date "+%H:%M:%S")  Barcelona, Spain"
+    printf "%s\n\n%s\n%s\n%s\n" "$first_line" "$second_line" "$third_line" "$fourth_line"
+    printf "%s\n\n%s\n%s\n%s\n" "$first_line" "$second_line" "$third_line" "$fourth_line" | tee | obs-screentext-btcassessors
+    sleep "$REFRESH_PERIOD"
+done
