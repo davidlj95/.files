@@ -4,7 +4,8 @@
 # <bitbar.author>Mat Ryer</bitbar.author>
 # <bitbar.author.github>matryer</bitbar.author.github>
 # <bitbar.desc>Gets the current external IP address.</bitbar.desc>
-EXTERNAL_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+EXTERNAL_IP=$(dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d \")
+#EXTERNAL_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 if [ "$1" = "copy" ]; then
   # Copy the IP to clipboard
