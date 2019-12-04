@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Fusuma
+GenericName=Touch gesture mapper
+#NoDisplay=true
+Comment=Map the touchpad gestures into commands
+Exec=/usr/bin/fusuma -d
+Terminal=true
