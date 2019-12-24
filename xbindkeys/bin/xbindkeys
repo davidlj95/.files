@@ -1,0 +1,10 @@
+#!/bin/sh
+XBINDKEYS_BIN="$(which -a xbindkeys | grep -v "$0" | head -n 1)"
+
+if [ -z "$XBINDKEYS_BIN" ]; then
+    >&2 echo "No xbindkeys binary found";
+    exit 1;
+fi
+
+pkill -u "$(whoami)" -f "$XBINDKEYS_BIN"
+"$XBINDKEYS_BIN"
