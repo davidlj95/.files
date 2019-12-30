@@ -83,6 +83,10 @@
 "lxpanelctl run"
   Mod4 + r
 
+# Lock
+"xscreensaver-command -lock"
+  Mod4 + l
+
 ##################################
 # End of xbindkeys configuration #
 ##################################

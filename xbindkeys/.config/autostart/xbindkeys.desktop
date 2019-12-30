@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=xbindkeys
+GenericName=Key binder
+Exec=/usr/bin/xbindkeys
+Terminal=true
