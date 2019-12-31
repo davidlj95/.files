@@ -87,6 +87,10 @@
 "xscreensaver-command -lock"
   Mod4 + l
 
+# Screngrab
+"screengrab"
+  Print
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
