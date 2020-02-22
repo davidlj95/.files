@@ -1,2 +1,4 @@
 #!/bin/sh
-xrandr --auto && xrandr --output eDP1 --right-of HDMI1
+xrandr --auto && \
+    xrandr --output eDP1 --left-of HDMI1 \
+           --output HDMI1 --left-of DP1
