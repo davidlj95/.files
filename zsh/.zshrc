@@ -91,6 +91,7 @@ plugins=(
     bundler
     common-aliases
     colored-man-pages
+    colorize
     copydir
     copyfile
     docker
@@ -111,6 +112,7 @@ plugins=(
     systemadmin
     systemd
     tmux
+    zsh_reload
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -144,3 +146,9 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Add syntax highlight
+ZSH_SHL_HOME="/usr/share/zsh/plugins/zsh-syntax-highlighting"
+if [ -d "$ZSH_SHL_HOME" ]; then
+    source "$ZSH_SHL_HOME/zsh-syntax-highlighting.zsh"
+fi
