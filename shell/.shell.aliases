@@ -1,4 +1,9 @@
-#!/usr/bin/env bash
+#
+# Shell aliases
+#
+# Tested with bash & zsh
+#
+
 # Git
 alias gcd="git checkout develop"
 alias gcm="git checkout master"
@@ -36,6 +41,6 @@ alias mvol="playerctl volume"
 alias mvolume="mvol"
 
 # OS-Specific aliases
-if [ `uname -o` = "Cygwin" ] && [ -d "$NIRCMD_HOME" ]; then
-	alias sudo="$NIRCMD_COMMAND elevate cmd.exe /K "
+if [ "$(uname -o)" = "Cygwin" ] && [ -d "$NIRCMD_HOME" ]; then
+	alias sudo='$NIRCMD_COMMAND elevate cmd.exe /K '
 fi

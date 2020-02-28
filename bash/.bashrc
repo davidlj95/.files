@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Cygwin UTF8
-[ `uname -o` = "Cygwin" ] && chcp.com 65001 > /dev/null 2>&1
+[ "$(uname -o)" = "Cygwin" ] && chcp.com 65001 > /dev/null 2>&1
 
 # Path to the bash it configuration
 export BASH_IT="$HOME/.bash_it"
@@ -55,12 +55,38 @@ export SCM_CHECK=true
 # Uncomment this to make Bash-it create alias reload.
 # export BASH_IT_RELOAD_LEGACY=1
 
+# Lo
+
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
 
 # Load aliases
-. "$HOME/.env"
-. "$HOME/.aliases"
+if [ -r "$HOME/.shell.aliases" ]; then
+    source "$HOME/.shell.aliases"
+fi
+# Load env
+if [ -r "$HOME/.shell.env" ]; then
+    source "$HOME/.shell.env"
+fi
+
+# Load completions
+## Generic
+[ -d "/usr/share/bash-completion/completions" ] && 
+	for f in /usr/share/bash-completion/completions/*;
+		do . "$f";
+	done
+[ -d "$HOME/.bash_completion.d" ] && 
+	for bcfile in ~/.bash_completion.d/* ; do
+		. $bcfile
+	done
+## NVM
+if [ -d "$NVM_HOME" ]; then
+	[ -s "$NVM_HOME/bash_completion" ] && \. "$NVM_HOME/bash_completion"  # This loads nvm bash_completion
+fi
+## Spring
+if [ -d "$SPRING_HOME" ]; then
+	source "$SPRING_HOME/shell-completion/bash/spring"
+fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/davidlj/.sdkman"
