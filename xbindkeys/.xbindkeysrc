@@ -77,7 +77,7 @@
 
 # New terminal emulator
 "gnome-terminal"
-  control + period
+  Mod4 + period
 
 # Run a command
 "lxpanelctl run"
