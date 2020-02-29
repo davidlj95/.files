@@ -78,6 +78,16 @@ HIST_STAMPS="yyyy-mm-dd"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Plugins configuration
+# # Bg notify
+bgnotify_threshold=4  ## set your own notification threshold
+
+function bgnotify_formatted {
+  ## $1=exit_status, $2=command, $3=elapsed_time
+  [ $1 -eq 0 ] && icon="✅" || icon="❌"
+  bgnotify "$icon Task finished ⏱️  ${3}s" "$2";
+}
+
+# # Magic enter
 MAGIC_ENTER_GIT_COMMAND="git status -u"
 MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
 
@@ -88,6 +98,8 @@ MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     alias-finder
+    archlinux
+    bgnotify
     bundler
     common-aliases
     colored-man-pages
@@ -95,6 +107,7 @@ plugins=(
     copydir
     copyfile
     docker
+    docker-compose
     dotenv
     emoji
     git
@@ -146,6 +159,12 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Add autosuggestions
+ZSH_AS_HOME="/usr/share/zsh/plugins/zsh-autosuggestions"
+if [ -d "$ZSH_AS_HOME" ]; then
+    source "$ZSH_AS_HOME/zsh-autosuggestions.zsh"
+fi
 
 # Add syntax highlight
 ZSH_SHL_HOME="/usr/share/zsh/plugins/zsh-syntax-highlighting"
