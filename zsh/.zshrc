@@ -162,12 +162,14 @@ fi
 
 # Add autosuggestions
 ZSH_AS_HOME="/usr/share/zsh/plugins/zsh-autosuggestions"
+is_mac_os && ZSH_AS_HOME="/usr/local/share/zsh-autosuggestions"
 if [ -d "$ZSH_AS_HOME" ]; then
     source "$ZSH_AS_HOME/zsh-autosuggestions.zsh"
 fi
 
 # Add syntax highlight
 ZSH_SHL_HOME="/usr/share/zsh/plugins/zsh-syntax-highlighting"
+is_mac_os && ZSH_SHL_HOME="/usr/local/share/zsh-syntax-highlighting"
 if [ -d "$ZSH_SHL_HOME" ]; then
     source "$ZSH_SHL_HOME/zsh-syntax-highlighting.zsh"
 fi
