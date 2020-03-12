@@ -1,0 +1,26 @@
+#!/bin/sh
+
+fetch_data() {
+    # https://github.com/mathdroid/covid-19-api
+    curl -s https://covid19.mathdro.id/api 
+}
+
+print_data() {
+    confirmed=$(echo "$1" | jq .confirmed.value)
+    recovered=$(echo "$1" | jq .recovered.value)
+    deaths=$(echo "$1" | jq .deaths.value)
+    last_update=$(echo "$1" | jq -r .lastUpdate)
+    last_update_local=$(LC_TIME=en_GB.UTF-8 date --date="$last_update")
+    printf "%s\n%s CON | %s REC | %s DEA\nUpdated: %s\n" \
+        "COVID-19 Stats" \
+        "$(format_number "$confirmed")" \
+        "$(format_number "$recovered")" \
+        "$(format_number "$deaths")" \
+        "$last_update_local"
+}
+format_number() {
+    printf "%'.0f" "$1"
+}
+
+data="$(fetch_data)"
+print_data "$data"
