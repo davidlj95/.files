@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+#
+# Records a video of the screen of the iOS Simulator
+#
+xcrun simctl \
+    io booted recordVideo \
+    --codec h264 -f \
+    "$*"
