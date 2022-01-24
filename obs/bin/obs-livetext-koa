@@ -1,0 +1,53 @@
+#!/bin/sh
+REFRESH_PERIOD=1
+OUTPUT_FILE="$HOME/Documents/obs-koa.txt"
+READY_FILE="$HOME/Documents/koa-daily-ready"
+DAILY_HOUR=10
+DAILY_MINUTE=15
+DAILY_SECOND=30
+GRACE_PERIOD=60
+
+# TODO: When time for daily exceeds NO_DAILY_TIMEFRAME, show next daily time
+#NO_DAILY_TIMEFRAME=3600
+#tomorrow_daily_datetime="$(date -j -v+1d -v${DAILY_HOUR}H -v${DAILY_MINUTE}M -v${DAILY_SECOND}S)"
+today_daily_timestamp="$(date -j -v${DAILY_HOUR}H -v${DAILY_MINUTE}M -v${DAILY_SECOND}S +%s)"
+
+# Not ready for daily
+echo false > "$READY_FILE"
+while true; do
+    clear
+    now_timestamp="$(date -j +%s)"
+    seconds_until_daily=$(( today_daily_timestamp - now_timestamp ))
+    # Ready for daily
+    ready_state="$(cat "$READY_FILE")"
+    if [ "$ready_state" = "true" ]; then
+        # Time for daily
+        first_line="Let's start the daily!"
+        second_line="We are all here, let's go"
+    else
+        # Waiting for people to join, or timeout
+        if [ $seconds_until_daily -lt 0 ]; then
+            first_line="Welcome everybody!"
+            if [ $seconds_until_daily -le -$GRACE_PERIOD ]; then
+                # Grace period end, show must go on
+                second_line="Time to daily, show must go on"
+            else 
+                # Grace period, wait for everybody to join
+                seconds_waited=$(( GRACE_PERIOD + seconds_until_daily ))
+                second_line="Let's wait a little bit until everybody joins ($seconds_waited)"
+            fi
+        fi
+        if [ $seconds_until_daily -eq 0 ]; then
+            # Start!
+            first_line="Daily time"
+        fi
+        if [ $seconds_until_daily -gt 0 ]; then
+            # Early birds
+            first_line="Hey early bird! Daily has not started yet"
+            second_line="Starting daily in $seconds_until_daily seconds..."
+        fi
+    fi
+    printf "%s\n\n%s" "$first_line" "$second_line"
+    printf "%s\n\n%s" "$first_line" "$second_line" | tee > "$OUTPUT_FILE"
+    sleep "$REFRESH_PERIOD"
+done
