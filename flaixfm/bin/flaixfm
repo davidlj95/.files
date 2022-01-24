@@ -1,3 +1,19 @@
 #!/bin/sh
 # vim: syntax=sh
-mplayer "$(flaixfm-url)" "$@"
+
+## First, mplayer!
+if which mplayer; then
+    mplayer "$(flaixfm-url)" "$@"
+fi
+
+## Otherwise, try vlc
+## For instance, no mplayer in macOS :(
+## https://mplayerosx.ch has been retired
+## TODO: find a cool music player for terminal in macOs
+## Like mpv.io
+if which vlc; then
+    vlc "$(flaixfm-url)" "$@" &
+fi
+
+>&2 echo "No app found to open the URL"
+flaixfm-url
