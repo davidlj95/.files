@@ -128,7 +128,6 @@ plugins=(
     systemadmin
     systemd
     tmux
-    zsh_reload
 )
 
 source $ZSH/oh-my-zsh.sh
