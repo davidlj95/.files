@@ -10,7 +10,7 @@ print_data() {
     recovered=$(echo "$1" | jq .recovered.value)
     deaths=$(echo "$1" | jq .deaths.value)
     last_update=$(echo "$1" | jq -r .lastUpdate)
-    last_update_local=$(LC_TIME=en_GB.UTF-8 date --date="$last_update")
+    last_update_local=$(LC_TIME='en_GB.UTF-8' echo "$last_update" | date)
     printf "%s\n%s CON | %s REC | %s DEA\nUpdated: %s\n" \
         "COVID-19 Stats" \
         "$(format_number "$confirmed")" \
