@@ -99,6 +99,7 @@ MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
 plugins=(
     alias-finder
     archlinux
+    aws
     bgnotify
     bundler
     common-aliases
@@ -114,6 +115,8 @@ plugins=(
     git-extras
     git-flow-avh
     github
+    kubectl
+    kube-ps1
     lol
     magic-enter
     man
@@ -129,6 +132,11 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# Docker manual completion
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+
 
 # User configuration
 
@@ -173,3 +181,7 @@ is_mac_os && ZSH_SHL_HOME="/usr/local/share/zsh-syntax-highlighting"
 if [ -d "$ZSH_SHL_HOME" ]; then
     source "$ZSH_SHL_HOME/zsh-syntax-highlighting.zsh"
 fi
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
