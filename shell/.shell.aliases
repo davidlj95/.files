@@ -1,4 +1,3 @@
-#
 # Shell aliases
 #
 # Tested with bash & zsh
@@ -8,6 +7,23 @@
 alias gcd="git checkout develop"
 alias gcm="git checkout master"
 alias gpf="git push --force-with-lease"
+## Git branch list prunables
+## Lists branches that can be pruned, as they don't exist on remote
+## Based on https://stackoverflow.com/a/17029936/3263250
+function gblp() {
+    git branch -r | \
+    awk '{print $1}' | \
+    egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | \
+    awk '{print $1}'
+}
+# Git branch prune
+# Remove local branches that are tracked remotely
+# but remote branch doesn't exit anymore
+alias gbp="gblp | xargs git branch -D"
+
+# Push and copy commit id of pushed thing
+alias gp="git push && gli"
+alias gli="git log --format='%H' -n 1 | pbcopy"
 alias gst="git status"
 alias glog="git log"
 alias gca="git commit --all"
@@ -41,6 +57,10 @@ alias mvol="playerctl volume"
 alias mvolume="mvol"
 
 # OS-Specific aliases
-if [ "$(uname -o)" = "Cygwin" ] && [ -d "$NIRCMD_HOME" ]; then
+if [ "$(uname)" = "Cygwin" ] && [ -d "$NIRCMD_HOME" ]; then
 	alias sudo='$NIRCMD_COMMAND elevate cmd.exe /K '
 fi
+
+# PostgreSQL
+alias psql="psql --host localhost -U postgres"
+alias createdb="createdb --host localhost -U postgres"
