@@ -136,6 +136,11 @@ source $ZSH/oh-my-zsh.sh
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 
+# AWS command completion
+if which aws_completer > /dev/null 2>&1; then
+	complete -C "$(which aws_completer)" aws
+fi
+
 
 # User configuration
 
@@ -168,6 +173,10 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Add autosuggestions
+# OS detection
+is_mac_os() {
+	[ "$(uname)" = "Darwin" ]
+}
 ZSH_AS_HOME="/usr/share/zsh/plugins/zsh-autosuggestions"
 is_mac_os && ZSH_AS_HOME="/usr/local/share/zsh-autosuggestions"
 if [ -d "$ZSH_AS_HOME" ]; then
@@ -184,3 +193,4 @@ fi
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
