@@ -64,3 +64,14 @@ fi
 # PostgreSQL
 alias psql="psql --host localhost -U postgres"
 alias createdb="createdb --host localhost -U postgres"
+
+# Media conversion
+function tomp4() {
+    while [ $# -gt 0 ]; do
+        file_to_convert="$1"
+        converted_file="${file_to_convert%.*}.mp4"
+        # ffmpeg -i "$file_to_convert" "$converted_file"
+        echo ffmpeg -i "$file_to_convert" "$converted_file"
+        shift
+    done
+}
