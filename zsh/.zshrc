@@ -105,7 +105,7 @@ plugins=(
     common-aliases
     colored-man-pages
     colorize
-    copydir
+    copypath
     copyfile
     docker
     docker-compose
