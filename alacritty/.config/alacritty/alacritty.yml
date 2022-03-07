@@ -1,3 +1,16 @@
 font:
   normal:
     family: "MesloLGS NF"
+
+key_bindings:
+  # Ajustes para teclado macOS español/Spanish de España con layout ISO (no ANSI); tecla Intro grande.
+  # https://github.com/alacritty/alacritty/issues/753#issuecomment-533040040
+  - { key: 10,        mods: Alt,    chars: "\x5c" } # barra invertida `\`
+  - { key: 18,        mods: Alt,    chars: "\x7c" } # barra vertical `|`
+  - { key: Key2,      mods: Alt,    chars: "@" } # arroba `@`
+  - { key: Key3,      mods: Alt,    chars: "#" } # almohadilla/cardinalidad `#`
+  - { key: Key6,      mods: Alt,    chars: "¬" } # negación en lógica `¬`
+  - { key: 39,        mods: Alt,    chars: "{" } # abre llaves `{`
+  - { key: 42,        mods: Alt,    chars: "}" } # cierra llaves `}`
+  - { key: 33,        mods: Alt,    chars: "[" } # abre corchetes `[`
+  - { key: 30,        mods: Alt,    chars: "]" } # cierra corchetes `]`
