@@ -14,3 +14,5 @@ key_bindings:
   - { key: 42,        mods: Alt,    chars: "}" } # cierra llaves `}`
   - { key: 33,        mods: Alt,    chars: "[" } # abre corchetes `[`
   - { key: 30,        mods: Alt,    chars: "]" } # cierra corchetes `]`
+  - { key: Right,     mods: Alt,    chars: "\x1BF" }
+  - { key: Left,      mods: Alt,    chars: "\x1BB" }
