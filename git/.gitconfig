@@ -7,4 +7,10 @@
 	name = "David LJ"
 	signingKey = "0x5DE6AC64"
 [commit]
-	gpgSign = true
+    gpgSign = true
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
