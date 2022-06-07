@@ -4,8 +4,6 @@
 #
 
 # Git
-alias gcd="git checkout develop"
-alias gcm="git checkout master"
 alias gpf="git push --force-with-lease"
 ## Git branch list prunables
 ## Lists branches that can be pruned, as they don't exist on remote
