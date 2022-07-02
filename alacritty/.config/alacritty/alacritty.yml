@@ -3,6 +3,14 @@ font:
     family: "MesloLGS NF"
 
 key_bindings:
+  # Font sizes
+  # https://github.com/alacritty/alacritty/blob/v0.10.1/alacritty.yml#L827-L832
+  - { key: Key0,           mods: Control,                         action: ResetFontSize    }
+  - { key: Equals,         mods: Control,                         action: IncreaseFontSize }
+  - { key: Plus,           mods: Control,                         action: IncreaseFontSize }
+  - { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
+  - { key: Minus,          mods: Control,                         action: DecreaseFontSize }
+  - { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
   # Ajustes para teclado macOS español/Spanish de España con layout ISO (no ANSI); tecla Intro grande.
   # https://github.com/alacritty/alacritty/issues/753#issuecomment-533040040
   - { key: 10,        mods: Alt,    chars: "\x5c" } # barra invertida `\`
