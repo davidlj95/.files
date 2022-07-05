@@ -91,6 +91,9 @@ function bgnotify_formatted {
 MAGIC_ENTER_GIT_COMMAND="git status -u"
 MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
 
+# # Tmux on start
+export ZSH_TMUX_AUTOSTART=true
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -128,19 +131,10 @@ plugins=(
     systemadmin
     systemd
     tmux
+    vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
-
-# Docker manual completion
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
-
-# AWS command completion
-if which aws_completer > /dev/null 2>&1; then
-	complete -C "$(which aws_completer)" aws
-fi
-
 
 # User configuration
 
@@ -189,8 +183,3 @@ is_mac_os && ZSH_SHL_HOME="/usr/local/share/zsh-syntax-highlighting"
 if [ -d "$ZSH_SHL_HOME" ]; then
     source "$ZSH_SHL_HOME/zsh-syntax-highlighting.zsh"
 fi
-
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
-
