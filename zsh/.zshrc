@@ -93,6 +93,7 @@ MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
 
 # # Tmux on start
 export ZSH_TMUX_AUTOSTART=true
+export ZSH_TMUX_AUTOCONNECT=false
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
@@ -182,4 +183,9 @@ ZSH_SHL_HOME="/usr/share/zsh/plugins/zsh-syntax-highlighting"
 is_mac_os && ZSH_SHL_HOME="/usr/local/share/zsh-syntax-highlighting"
 if [ -d "$ZSH_SHL_HOME" ]; then
     source "$ZSH_SHL_HOME/zsh-syntax-highlighting.zsh"
+fi
+
+# Load Angular CLI autocompletion.
+if command_exists ng && ng completion script > /dev/null 2>&1; then
+    source <(ng completion script)
 fi
