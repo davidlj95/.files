@@ -17,8 +17,10 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# In case using IntelliJ IDE, use agnoster, seems something weird with p10k
 ZSH_CUSTOM="$ZSH/custom"
-if [ -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
+if [ -d "$ZSH_CUSTOM/themes/powerlevel10k" ] && 
+    [ -z "$INTELLIJ_ENVIRONMENT_READER"  ]; then
     ZSH_THEME="powerlevel10k/powerlevel10k"
 else
     ZSH_THEME="agnoster"
@@ -92,7 +94,9 @@ MAGIC_ENTER_GIT_COMMAND="git status -u"
 MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
 
 # # Tmux on start
-export ZSH_TMUX_AUTOSTART=true
+if [ -z "$INTELLIJ_ENVIRONMENT_READER"  ]; then
+    export ZSH_TMUX_AUTOSTART=true
+fi
 export ZSH_TMUX_AUTOCONNECT=false
 
 # Which plugins would you like to load?
