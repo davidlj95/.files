@@ -123,6 +123,7 @@ plugins=(
     git-extras
     git-flow-avh
     github
+    gitignore
     kubectl
     kube-ps1
     lol
