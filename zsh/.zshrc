@@ -94,9 +94,6 @@ MAGIC_ENTER_GIT_COMMAND="git status -u"
 MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
 
 # # Tmux on start
-if [ -z "$INTELLIJ_ENVIRONMENT_READER"  ]; then
-    export ZSH_TMUX_AUTOSTART=true
-fi
 export ZSH_TMUX_AUTOCONNECT=false
 
 # Which plugins would you like to load?
@@ -131,7 +128,10 @@ plugins=(
     man
     ng
     npm
+    rails
     rsync
+    ruby
+    rvm
     sdk
     sudo
     systemadmin
