@@ -4,7 +4,6 @@
 #
 
 # Git
-alias gpf="git push --force-with-lease"
 ## Git branch list prunables
 ## Lists branches that can be pruned, as they don't exist on remote
 ## Based on https://stackoverflow.com/a/17029936/3263250
@@ -20,11 +19,7 @@ function gblp() {
 alias gbp="gblp | xargs git branch -D"
 
 # Push and copy commit id of pushed thing
-alias gp="git push && gli"
 alias gli="git log --format='%H' -n 1 | pbcopy"
-alias gst="git status"
-alias glog="git log"
-alias gca="git commit --all"
 
 # # Git flow
 alias gfli="git flow init"
