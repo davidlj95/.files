@@ -136,6 +136,7 @@ plugins=(
     sudo
     systemadmin
     systemd
+    terraform
     tmux
     vi-mode
 )
