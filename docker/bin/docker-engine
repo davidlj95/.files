@@ -1,0 +1,60 @@
+#!/bin/sh
+# Start and stop Docker via Docker Desktop app on macOs
+# Based on https://stackoverflow.com/a/63890717/3263250
+command="$1"
+
+show_help() {
+    echo "Usage: '$0' start|stop|status" >&2
+}
+
+docker_start() {
+    if [ "$(docker_status)" = "started" ]; then
+        echo "Already started" >&2
+        return
+    fi
+
+    printf "Starting Docker..."
+    open -a Docker
+    while ! docker_ready; do printf "."; done
+    echo "done"
+}
+
+docker_stop() {
+    if [ "$(docker_status)" = "stopped" ]; then
+        echo "Already stopped" >&2
+        return
+    fi
+
+    printf "Stopping Docker..."
+    pkill -SIGHUP -f /Applications/Docker.app 'docker serve'
+    while docker_ready; do printf "."; done
+    echo "done"
+}
+
+docker_status() {
+    if pgrep "Docker" > /dev/null; then
+        echo "started"
+    else
+        echo "stopped"
+    fi
+}
+
+docker_ready() {
+    docker info > /dev/null 2>&1
+}
+
+case $command in
+    "start")
+        docker_start
+        ;;
+    "stop")
+        docker_stop
+        ;;
+    "status")
+        docker_status
+        ;;
+    *)
+        show_help
+        ;;
+esac
+
