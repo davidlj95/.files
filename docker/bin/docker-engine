@@ -3,6 +3,13 @@
 # Based on https://stackoverflow.com/a/63890717/3263250
 command="$1"
 
+ensure_macos_is_running() {
+    if ! [[ "$OSTYPE" == "darwin"* ]]; then
+        echo "This script only works for macOs right now" >&2
+        exit 1
+    fi
+}
+
 show_help() {
     echo "Usage: '$0' start|stop|status" >&2
 }
@@ -42,6 +49,8 @@ docker_status() {
 docker_ready() {
     docker info > /dev/null 2>&1
 }
+
+ensure_macos_is_running
 
 case $command in
     "start")
