@@ -133,7 +133,6 @@ plugins=(
     ruby
     rvm
     sdk
-    sudo
     systemadmin
     systemd
     terraform
