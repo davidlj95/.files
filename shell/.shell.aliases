@@ -21,6 +21,9 @@ alias gbp="gblp | xargs git branch -D"
 # Push and copy commit id of pushed thing
 alias gli="git log --format='%H' -n 1 | pbcopy"
 
+# Uncommit last commit, so you can commit again
+alias gunc="git reset --soft HEAD~"
+
 # # Git flow
 alias gfli="git flow init"
 alias gflfs="git flow feature start"
@@ -82,3 +85,6 @@ alias gtlo='gt log'
 alias gtsl='gt log short'
 alias gtres='gt repo sync --restack'
 alias gtss='gt stack submit'
+
+# Shred
+alias srm="shred -un 42"
