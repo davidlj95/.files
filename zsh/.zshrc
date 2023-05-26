@@ -123,7 +123,6 @@ plugins=(
     gitignore
     kubectl
     kube-ps1
-    lol
     magic-enter
     man
     ng
