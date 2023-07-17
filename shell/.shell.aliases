@@ -88,3 +88,6 @@ alias gtss='gt stack submit'
 
 # Shred
 alias srm="shred -un 42"
+
+# Tailscale for macOs
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
