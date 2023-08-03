@@ -2,25 +2,6 @@
 // https://finicky-kickstart.vercel.app/
 // Save as ~/.finicky.js
 
-const googleMeetApp = ({urlString}) => ({
-    name: "Google Chrome",
-    profile: "Profile 3", // use whatever profile created the application shortcut
-    args: [
-        `--app-id=kjgfgldnnfoeklkmfkjfagphfepbbdan`, // my app ID for my Google Meet application shortcut
-        `--app-launch-url-for-shortcuts-menu-item=${urlString}`,
-        // notice I'm not passing urlString as an array entry, since Chrome Application Shortcuts don't like that
-    ],
-})
-
-const graphiteApp = {
-    name: "/Applications/Graphite.app",
-    appType: "appPath",
-}
-
-const workBrowser = {
-    name: "Google Chrome",
-    profile: "Profile 3"
-};
 const personalBrowser = {
     name: "Google Chrome",
     profile: "Default"
@@ -30,32 +11,14 @@ module.exports = {
     defaultBrowser: "Google Chrome",
     handlers: [
         {
-            match: finicky.matchHostnames(["meet.google.com"]),
-            browser: googleMeetApp,
-        },
-        {
-            // Open any link clicked in Slack in my work browser
-            match: ({opener, url}) =>
-                opener.bundleId === "com.tinyspeck.slackmacgap" && !url.host.endsWith("notion.so"),
-            browser: workBrowser,
-        },
-        {
             match: ({url}) => url.host.endsWith("notion.so"),
             browser: {
                 name: "Notion"
             },
         },
         {
-            match: ({url}) => url.host.endsWith("github.com"),
-            browser: workBrowser,
-        },
-        {
             match: ({url}) => url.host.endsWith("linkedin.com"),
             browser: personalBrowser,
-        },
-        {
-            match: ({url}) => url.host.endsWith("app.graphite.dev"),
-            browser: graphiteApp,
         }
     ]
 }
