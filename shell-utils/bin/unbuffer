@@ -7,4 +7,6 @@
 # ping google.com | unbuffer cut -c1-80 > myfile.txt
 #
 # This way the file is updated on each ping
+# shellcheck disable=SC2086
+# shellcheck disable=SC2048
 stdbuf -oL $*
