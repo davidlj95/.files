@@ -141,8 +141,8 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # Load shell environment
-if [ -r "$HOME/.shell.env" ]; then
-    source "$HOME/.shell.env"
+if [ -r "$HOME/.shell.env.sh" ]; then
+    source "$HOME/.shell.env.sh"
 fi
 
 # export MANPATH="/usr/local/man:$MANPATH"

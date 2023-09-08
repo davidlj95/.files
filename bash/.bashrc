@@ -65,8 +65,8 @@ if [ -r "$HOME/.shell.aliases.sh" ]; then
     source "$HOME/.shell.aliases.sh"
 fi
 # Load env
-if [ -r "$HOME/.shell.env" ]; then
-    source "$HOME/.shell.env"
+if [ -r "$HOME/.shell.env.sh" ]; then
+    source "$HOME/.shell.env.sh"
 fi
 
 # Load completions
