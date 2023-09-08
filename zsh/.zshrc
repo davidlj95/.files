@@ -166,8 +166,8 @@ fi
 # For a full list of active aliases, run `alias`.
 #
 # Load dotfiles aliases
-if [ -r "$HOME/.shell.aliases" ]; then
-    source "$HOME/.shell.aliases"
+if [ -r "$HOME/.shell.aliases.sh" ]; then
+    source "$HOME/.shell.aliases.sh"
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

@@ -61,8 +61,8 @@ export SCM_CHECK=true
 source "$BASH_IT"/bash_it.sh
 
 # Load aliases
-if [ -r "$HOME/.shell.aliases" ]; then
-    source "$HOME/.shell.aliases"
+if [ -r "$HOME/.shell.aliases.sh" ]; then
+    source "$HOME/.shell.aliases.sh"
 fi
 # Load env
 if [ -r "$HOME/.shell.env" ]; then
