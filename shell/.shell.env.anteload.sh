@@ -129,11 +129,6 @@ fi
 export GOPATH="$HOME/.go"
 
 ## 4. Package managers & build tools
-# Node.js: yarn
-if [ -d "$HOME/.yarn" ]; then
-  prepend_to_path "$HOME/.yarn/bin"
-fi
-
 # Java: gradle
 export GRADLE_COMMAND="gradle"
 export GRADLE_HOME="$USER_APPS_DIR/gradle/default"
