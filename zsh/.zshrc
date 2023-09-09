@@ -133,6 +133,10 @@ plugins=(
     terraform
     tmux
     vi-mode
+    # https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh
+    zsh-autosuggestions
+    # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh
+    zsh-syntax-highlighting
 )
 
 utils_file="$HOME/.shell.utils.sh"
@@ -171,14 +175,6 @@ aliases_file="$HOME/.shell.aliases.sh"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Add autosuggestions
-zsh_as_script="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-[ -f "$zsh_as_script" ] && [ -r "$zsh_as_script" ] && source "$zsh_as_script"
-
 # Env configs after loading framework
 env_postload_file="$HOME/.shell.env.postload.sh"
 [ -r "$utils_file" ] && [ -r "$env_postload_file" ] && source "$env_postload_file"
-
-# Add syntax highlight. MUST be at end of this file
-zsh_shl_script="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-[ -f "$zsh_shl_script" ] && [ -r "$zsh_shl_script" ] && source "$zsh_shl_script"
