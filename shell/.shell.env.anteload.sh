@@ -159,11 +159,8 @@ if directory_exists_and_is_readable "$cuda_home"; then
   export LD_LIBRARY_PATH="$cuda_home/lib64:$LD_LIBRARY_PATH"
 fi
 
-# Direnv
-DIRENV_COMMAND="direnv"
-if command_exists "$DIRENV_COMMAND"; then
-  eval "$("$DIRENV_COMMAND" hook "$SHELL")"
-fi
+# direnv
+command_exists direnv && eval "$(direnv hook "$SHELL")"
 
 # Fuck
 command_exists fuck && eval "$(thefuck --alias)"
