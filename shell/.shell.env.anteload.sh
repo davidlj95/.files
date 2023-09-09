@@ -165,12 +165,6 @@ command_exists direnv && eval "$(direnv hook "$SHELL")"
 # Fuck
 command_exists fuck && eval "$(thefuck --alias)"
 
-# Hub: GitHub CLI tool
-export HUB_COMMAND="hub"
-if command_exists "$HUB_COMMAND"; then
-  eval "$("$HUB_COMMAND" alias -s "$SHELL")"
-fi
-
 # Jetbrains Toolbox
 # https://blog.jetbrains.com/blog/2022/07/07/toolbox-app-1-25-is-here/
 get_jetbrains_toolbox_dir() {
