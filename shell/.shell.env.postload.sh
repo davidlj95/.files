@@ -5,7 +5,7 @@
 # Tested in zsh (though this was started using bash)
 
 # Utils
-command_without_completions_exist() {
+command_without_completions_exists() {
   command_exists "$1" && ! completions_exist_for "$1"
 }
 
@@ -21,7 +21,7 @@ if command_exists compdef; then
   fi
 
   # Graphite
-  if command_without_completions_exist gt; then
+  if command_without_completions_exists gt; then
     # shellcheck disable=SC1090
     source <(gt completion)
   fi
