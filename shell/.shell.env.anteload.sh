@@ -188,11 +188,5 @@ if directory_exists_and_is_readable "$spring_home"; then
   prepend_to_path "$spring_home/bin"
 fi
 
-# Terraform
-TERRAFORM_HOME="/usr/local/opt/terraform@0.11"
-if [ -d "$TERRAFORM_HOME" ]; then
-  prepend_to_path "$TERRAFORM_HOME/bin"
-fi
-
 ## X. Overrides specific to this machine
 source_if_file_exists_and_is_readable "$HOME/.shell.env.anteload.overrides.sh"
