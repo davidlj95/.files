@@ -159,6 +159,9 @@ if directory_exists_and_is_readable "$cuda_home"; then
   export LD_LIBRARY_PATH="$cuda_home/lib64:$LD_LIBRARY_PATH"
 fi
 
+# Docker Desktop
+source_if_file_exists_and_is_readable "$HOME/.docker/init-zsh.sh"
+
 # direnv
 command_exists direnv && eval "$(direnv hook "$SHELL")"
 

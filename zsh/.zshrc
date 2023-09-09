@@ -203,5 +203,3 @@ fi
 if command_exists ng && ng completion script > /dev/null 2>&1; then
     source <(ng completion script)
 fi
-
-source /Users/davidlj95/.docker/init-zsh.sh || true # Added by Docker Desktop
