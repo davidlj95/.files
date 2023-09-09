@@ -69,7 +69,7 @@ sdkman_dir="$sdkman_default_dir"
 sdkman_default_dir="$HOME/.sdkman" # https://sdkman.io/install
 if [ -d "$sdkman_dir" ]; then
   # Init
-  source "$sdkman_dir/bin/sdkman-init.sh"
+  source_if_file_exists_and_is_readable "$sdkman_dir/bin/sdkman-init.sh"
 
   # Set current as JAVA_HOME
   sdkman_current_dir="$sdkman_dir/candidates/java/current"
@@ -108,7 +108,7 @@ if ! command_exists rvm; then
   rvm_dir_usr_local="/usr/local/rvm"
   for rvm_dir in "$rvm_dir_home" "$rvm_dir_usr_local"; do
     if directory_exists_and_is_readable "$rvm_dir"; then
-      [[ -s "$rvm_dir/scripts/rvm" ]] && source "$rvm_dir/scripts/rvm"
+      source_if_file_exists_and_is_readable "$rvm_dir/scripts/rvm"
       break
     fi
   done
@@ -120,7 +120,7 @@ if command_exists rvm; then
   # Completions may be there already. For instance, rvm OhMyZsh plugin loads them
   # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rvm/rvm.plugin.zsh
   if ! completions_exist_for rvm; then
-    [[ -r $rvm_path/scripts/completion ]] && . "$rvm_path"/scripts/completion
+    source_if_file_exists_and_is_readable "$rvm_path"/scripts/completion
   fi
 fi
 
@@ -132,7 +132,7 @@ export GOPATH="$HOME/.go"
 # Rust: cargo
 cargo_dir="$HOME/.cargo"
 prepend_to_path_if_exists_and_is_readable "$cargo_dir/bin"
-[ -r "$cargo_dir/env" ] && source "$cargo_dir/env"
+source_if_file_exists_and_is_readable "$cargo_dir/env"
 
 ## 5. Apps
 # Android
@@ -225,6 +225,4 @@ if [ -d "$TERRAFORM_HOME" ]; then
 fi
 
 ## X. Overrides specific to this machine
-if [ -r "$HOME/.shell.overrides" ]; then
-  source "$HOME/.shell.overrides"
-fi
+source_if_file_exists_and_is_readable "$HOME/.shell.env.anteload.overrides.sh"

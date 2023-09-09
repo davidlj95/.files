@@ -11,3 +11,6 @@ if command_exists gt && ! completions_exist_for gt && command_exists compdef; th
   # shellcheck disable=SC1090
   source <(gt completion)
 fi
+
+## X. Overrides specific to this machine
+source_if_file_exists_and_is_readable "$HOME/.shell.env.postload.overrides.sh"
