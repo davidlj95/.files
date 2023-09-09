@@ -1,4 +1,5 @@
-# Configures the shell environment
+# Configures the shell environment. Launched before (ante) shell framework is loaded.
+# *chose 'ante' so file appears before 'post' one :P https://english.stackexchange.com/a/541758
 #
 # Aimed to be shell independent
 #
@@ -8,46 +9,9 @@
 export USER_APPS_DIR="$HOME/app"
 export USER_LIBS_DIR="$HOME/lib"
 
-# Helpers
-command_exists() {
-  command -v "$1" >/dev/null 2>&1
-}
-
-prepend_to_path() {
-  export PATH="$1:$PATH"
-}
-
-prepend_to_path_if_exists_and_readable() {
-  directory_exists_and_is_readable "$1" && prepend_to_path "$1"
-}
-
-datauri2image() {
-  sed 's/data:image\/png;base64,//g' | base64 -d
-}
-
-directory_exists_and_is_readable() {
-  [ -d "$1" ] && [ -r "$1" ]
-}
-
-completions_exist_for() {
-  # https://stackoverflow.com/a/40014760
-  # https://stackoverflow.com/a/35923387
-  # shellcheck disable=SC2154
-  (echo "$_comps" | grep -q "_$1") || (command_exists complete && complete -p | grep -q "$1")
-}
-
 # Home bins
 prepend_to_path "$HOME/bin"
 prepend_to_path "$HOME/.local/bin"
-
-# OS detection
-is_mac_os() {
-  [ "$(uname)" = "Darwin" ]
-}
-
-is_linux_os() {
-  [ "$(uname)" = "Linux" ]
-}
 
 ## 0. Shell customizations
 export EDITOR=vim
@@ -93,9 +57,9 @@ if directory_exists_and_is_readable "$fvm_home_dir"; then
   # https://github.com/fluttertools/fvm/blob/2.4.1/lib/src/services/cache_service.dart#L146-L163
   # https://github.com/fluttertools/fvm/blob/2.4.1/lib/src/services/context.dart#L75-L82
   fvm_default_dir="$fvm_home_dir/default"
-  prepend_to_path_if_exists_and_readable "$fvm_default_dir/bin"
+  prepend_to_path_if_exists_and_is_readable "$fvm_default_dir/bin"
   # 👇 To use dart from CLI using global fvm version. Not strictly needed, but is nice to have.
-  prepend_to_path_if_exists_and_readable "$fvm_default_dir/cache/dart-sdk/bin"
+  prepend_to_path_if_exists_and_is_readable "$fvm_default_dir/cache/dart-sdk/bin"
 fi
 
 # Java: SDKMAN!
@@ -149,7 +113,7 @@ if ! command_exists rvm; then
 fi
 if command_exists rvm; then
   # shellcheck disable=SC2154
-  prepend_to_path_if_exists_and_readable "$rvm_path/bin"
+  prepend_to_path_if_exists_and_is_readable "$rvm_path/bin"
 
   # Completions may be there already. For instance, rvm OhMyZsh plugin loads them
   # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rvm/rvm.plugin.zsh
@@ -175,7 +139,7 @@ export GRADLE_HOME="$USER_APPS_DIR/gradle/default"
 
 # Rust: cargo
 cargo_dir="$HOME/.cargo"
-prepend_to_path_if_exists_and_readable "$cargo_dir/bin"
+prepend_to_path_if_exists_and_is_readable "$cargo_dir/bin"
 [ -r "$cargo_dir/env" ] && source "$cargo_dir/env"
 
 ## 5. Apps
@@ -206,14 +170,6 @@ fi
 
 # Fuck
 command_exists fuck && eval "$(thefuck --alias)"
-
-# Graphite
-# `compdef` needed to load completions. This may fail if loaded before initialized
-# For instance, before sourcing OhMyZsh script in `.zshrc`
-if command_exists gt && ! completions_exist_for gt && command_exists compdef; then
-  # shellcheck disable=SC1090
-  source <(gt completion)
-fi
 
 # Hub: GitHub CLI tool
 export HUB_COMMAND="hub"

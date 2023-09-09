@@ -135,15 +135,23 @@ plugins=(
     vi-mode
 )
 
+utils_file="$HOME/.shell.utils.sh"
+env_anteload_file="$HOME/.shell.env.anteload.sh"
+if [ -r "$utils_file" ]; then
+    source "$utils_file"
+    [ -r "$env_anteload_file" ] && source "$env_anteload_file"
+fi
+aliases_file="$HOME/.shell.aliases.sh"
+[ -r "$aliases_file" ] && source "$aliases_file"
+
 source $ZSH/oh-my-zsh.sh
 
 
 # User configuration
 
-# Load shell environment
-if [ -r "$HOME/.shell.env.sh" ]; then
-    source "$HOME/.shell.env.sh"
-fi
+# Env configs after loading framework
+env_postload_file="$HOME/.shell.env.postload.sh"
+[ -r "$utils_file" ] && [ -r "$env_postload_file" ] && source "$env_postload_file"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

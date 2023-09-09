@@ -1,18 +1,10 @@
 # Shell aliases
 #
-# Tested with bash & zsh
-#
+# Tested with zsh
 
 # Git
-## Git branch list prunables
-## Lists branches that can be pruned, as they don't exist on remote
-## Based on https://stackoverflow.com/a/17029936/3263250
-function gblp() {
-    git branch -r | \
-    awk '{print $1}' | \
-    egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | \
-    awk '{print $1}'
-}
+alias gblp=git-branch-list-prunables
+
 # Git branch prune
 # Remove local branches that are tracked remotely
 # but remote branch doesn't exit anymore
@@ -60,17 +52,6 @@ fi
 # PostgreSQL
 alias psql="psql --host localhost -U postgres"
 alias createdb="createdb --host localhost -U postgres"
-
-# Media conversion
-function tomp4() {
-    while [ $# -gt 0 ]; do
-        file_to_convert="$1"
-        converted_file="${file_to_convert%.*}.mp4"
-        # ffmpeg -i "$file_to_convert" "$converted_file"
-        echo ffmpeg -i "$file_to_convert" "$converted_file"
-        shift
-    done
-}
 
 # External IP address
 # https://unix.stackexchange.com/a/81699/37512

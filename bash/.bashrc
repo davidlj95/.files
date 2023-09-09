@@ -55,19 +55,21 @@ export SCM_CHECK=true
 # Uncomment this to make Bash-it create alias reload.
 # export BASH_IT_RELOAD_LEGACY=1
 
-# Lo
+utils_file="$HOME/.shell.utils.sh"
+env_anteload_file="$HOME/.shell.env.anteload.sh"
+if [ -r "$utils_file" ]; then
+    source "$utils_file"
+    [ -r "$env_anteload_file" ] && source "$env_anteload_file"
+fi
+aliases_file="$HOME/.shell.aliases.sh"
+[ -r "$aliases_file" ] && source "$aliases_file"
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
 
-# Load aliases
-if [ -r "$HOME/.shell.aliases.sh" ]; then
-    source "$HOME/.shell.aliases.sh"
-fi
-# Load env
-if [ -r "$HOME/.shell.env.sh" ]; then
-    source "$HOME/.shell.env.sh"
-fi
+# Env configs after loading framework
+env_postload_file="$HOME/.shell.env.postload.sh"
+[ -r "$utils_file" ] && [ -r "$env_postload_file" ] && source "$env_postload_file"
 
 # Load completions
 ## Generic
