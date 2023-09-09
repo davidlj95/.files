@@ -147,6 +147,10 @@ if [ -r "$utils_file" ]; then
     [ -r "$env_anteload_file" ] && source "$env_anteload_file"
 fi
 
+# Extra completions
+# Why this needs to be here: https://github.com/zsh-users/zsh-completions/issues/603#issuecomment-967116106
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -175,6 +179,7 @@ aliases_file="$HOME/.shell.aliases.sh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 
 # Env configs after loading framework
 env_postload_file="$HOME/.shell.env.postload.sh"
