@@ -121,7 +121,7 @@ plugins=(
     kube-ps1
     magic-enter
     man
-    ng
+    #ng (super incomplete ones, better use official ones!)
     npm
     rails
     rsync
@@ -148,10 +148,6 @@ source $ZSH/oh-my-zsh.sh
 
 
 # User configuration
-
-# Env configs after loading framework
-env_postload_file="$HOME/.shell.env.postload.sh"
-[ -r "$utils_file" ] && [ -r "$env_postload_file" ] && source "$env_postload_file"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -199,7 +195,6 @@ if [ -d "$ZSH_SHL_HOME" ]; then
     source "$ZSH_SHL_HOME/zsh-syntax-highlighting.zsh"
 fi
 
-# Load Angular CLI autocompletion.
-if command_exists ng && ng completion script > /dev/null 2>&1; then
-    source <(ng completion script)
-fi
+# Env configs after loading framework
+env_postload_file="$HOME/.shell.env.postload.sh"
+[ -r "$utils_file" ] && [ -r "$env_postload_file" ] && source "$env_postload_file"
