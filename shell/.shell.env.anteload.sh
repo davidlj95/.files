@@ -182,36 +182,11 @@ get_jetbrains_toolbox_dir() {
 jetbrains_dir="$(get_jetbrains_toolbox_dir)"
 [ -n "$jetbrains_dir" ] && prepend_to_path "$jetbrains_dir"
 
-# JMeter
-export JMETER_COMMAND="jmeter"
-export JMETER_HOME="$USER_APPS_DIR/apache-jmeter/default"
-[ -d "$JMETER_HOME" ] && prepend_to_path "$JMETER_HOME/bin"
-
-# Maven
-export MAVEN_COMMAND="maven"
-export MAVEN_HOME="$USER_APPS_DIR/apache-maven/default"
-[ -d "$MAVEN_HOME" ] && prepend_to_path "$MAVEN_HOME/bin"
-
-# NirCmd
-export NIRCMD_COMMAND="nircmd.exe"
-export NIRCMD_HOME="$USER_APPS_DIR/nircmd/default"
-if [ -d "$NIRCMD_HOME" ]; then
-  prepend_to_path "$NIRCMD_HOME"
-fi
-
 # Spring CLI
 export SPRING_COMMAND="spring"
 export SPRING_HOME="$sdkman_dir/candidates/springboot/current"
 if [ -d "$SPRING_HOME" ]; then
   prepend_to_path "$SPRING_HOME/bin"
-fi
-
-# Spring Roo
-export ROO_COMMAND="roo"
-export ROO_HOME="$USER_APPS_DIR/spring-roo/default"
-if [ -d "$ROO_HOME" ]; then
-  prepend_to_path "$ROO_HOME/bin"
-  alias roo="roo.sh"
 fi
 
 # Terraform
