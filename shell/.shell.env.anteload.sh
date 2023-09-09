@@ -136,14 +136,20 @@ source_if_file_exists_and_is_readable "$cargo_dir/env"
 
 ## 5. Apps
 # Android
-if is_mac_os; then
-  export ANDROID_HOME=$HOME/Library/Android/Sdk
-else
-  export ANDROID_HOME=$HOME/Android/Sdk
-fi
-if [ -d "$ANDROID_HOME" ]; then
-  prepend_to_path "${ANDROID_HOME}/emulator"
-  prepend_to_path "${ANDROID_HOME}/platform-tools"
+get_android_home_dir() {
+  mac_os_android_home="$HOME/Library/Android/Sdk"
+  linux_android_home="$HOME/Android/Sdk"
+  if is_mac_os && directory_exists_and_is_readable "$mac_os_android_home"; then
+    echo "$mac_os_android_home"
+  elif directory_exists_and_is_readable "$linux_android_home"; then
+    echo "$linux_android_home"
+  fi
+}
+android_home="$(get_android_home_dir)"
+if [ -n "$android_home" ]; then
+  export ANDROID_HOME="$android_home"
+  prepend_to_path "${android_home}/emulator"
+  prepend_to_path "${android_home}/platform-tools"
 fi
 
 # CUDA: NVIDIA GPU API
