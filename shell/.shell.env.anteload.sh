@@ -43,8 +43,10 @@ get_homebrew_dir() {
     fi
   fi
 }
-HOMEBREW_DIR="$(get_homebrew_dir)"
-[ -n "$HOMEBREW_DIR" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+if ! command_exists brew; then
+  homebrew_dir="$(get_homebrew_dir)"
+  [ -n "$homebrew_dir" ] && eval "$("$homebrew_dir/bin/brew" shellenv)"
+fi
 
 ## 2. Runtime version managers
 # Flutter: Flutter Version Manager (fvm)
