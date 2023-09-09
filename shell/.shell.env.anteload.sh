@@ -183,10 +183,9 @@ jetbrains_dir="$(get_jetbrains_toolbox_dir)"
 [ -n "$jetbrains_dir" ] && prepend_to_path "$jetbrains_dir"
 
 # Spring CLI
-export SPRING_COMMAND="spring"
-export SPRING_HOME="$sdkman_dir/candidates/springboot/current"
-if [ -d "$SPRING_HOME" ]; then
-  prepend_to_path "$SPRING_HOME/bin"
+spring_home="$sdkman_dir/candidates/springboot/current"
+if directory_exists_and_is_readable "$spring_home"; then
+  prepend_to_path "$spring_home/bin"
 fi
 
 # Terraform
