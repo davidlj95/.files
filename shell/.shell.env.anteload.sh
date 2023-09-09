@@ -153,11 +153,10 @@ if [ -n "$android_home" ]; then
 fi
 
 # CUDA: NVIDIA GPU API
-export CUDA_COMMAND="cuda"
-export CUDA_HOME="/usr/local/cuda"
-if [ -d "$CUDA_HOME" ]; then
-  prepend_to_path "$CUDA_HOME/bin"
-  export LD_LIBRARY_PATH="$CUDA_HOME/lib64:$LD_LIBRARY_PATH"
+export cuda_home="/usr/local/cuda"
+if directory_exists_and_is_readable "$cuda_home"; then
+  prepend_to_path "$cuda_home/bin"
+  export LD_LIBRARY_PATH="$cuda_home/lib64:$LD_LIBRARY_PATH"
 fi
 
 # Direnv
