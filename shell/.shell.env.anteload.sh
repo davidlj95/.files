@@ -129,11 +129,6 @@ fi
 export GOPATH="$HOME/.go"
 
 ## 4. Package managers & build tools
-# Java: gradle
-export GRADLE_COMMAND="gradle"
-export GRADLE_HOME="$USER_APPS_DIR/gradle/default"
-[ -d "$GRADLE_HOME" ] && prepend_to_path "$GRADLE_HOME/bin"
-
 # Rust: cargo
 cargo_dir="$HOME/.cargo"
 prepend_to_path_if_exists_and_is_readable "$cargo_dir/bin"
