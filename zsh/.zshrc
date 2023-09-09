@@ -172,23 +172,13 @@ aliases_file="$HOME/.shell.aliases.sh"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Add autosuggestions
-# OS detection
-is_mac_os() {
-	[ "$(uname)" = "Darwin" ]
-}
-ZSH_AS_HOME="/usr/share/zsh/plugins/zsh-autosuggestions"
-is_mac_os && ZSH_AS_HOME="/usr/local/share/zsh-autosuggestions"
-if [ -d "$ZSH_AS_HOME" ]; then
-    source "$ZSH_AS_HOME/zsh-autosuggestions.zsh"
-fi
-
-# Add syntax highlight
-ZSH_SHL_HOME="/usr/share/zsh/plugins/zsh-syntax-highlighting"
-is_mac_os && ZSH_SHL_HOME="/usr/local/share/zsh-syntax-highlighting"
-if [ -d "$ZSH_SHL_HOME" ]; then
-    source "$ZSH_SHL_HOME/zsh-syntax-highlighting.zsh"
-fi
+zsh_as_script="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[ -f "$zsh_as_script" ] && [ -r "$zsh_as_script" ] && source "$zsh_as_script"
 
 # Env configs after loading framework
 env_postload_file="$HOME/.shell.env.postload.sh"
 [ -r "$utils_file" ] && [ -r "$env_postload_file" ] && source "$env_postload_file"
+
+# Add syntax highlight. MUST be at end of this file
+zsh_shl_script="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f "$zsh_shl_script" ] && [ -r "$zsh_shl_script" ] && source "$zsh_shl_script"
