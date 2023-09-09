@@ -15,7 +15,7 @@ command_without_completions_exists() {
 if command_exists compdef; then
   # Angular
   # Seems that there are some built-in completions, but very "incomplete" :P. So add official anyway
-  if command_without_completions_exists ng; then
+  if command_exists ng; then
     # shellcheck disable=SC1090
     source <(ng completion script)
   fi
