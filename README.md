@@ -68,6 +68,10 @@ cd $HOME/.files # ensure you're in the repository
 stow -D directory
 ```
 
+# Docs
+## Shell
+The `shell` directory contains configurations that are shell-agnostic. Should work with `zsh` and `bash`. In order to load them, `bash` and `zsh` configs try to source those files if present.
+
 # Developing
 A Jetbrains IDE is used to manage the repository. 
 
@@ -77,12 +81,11 @@ A Jetbrains IDE is used to manage the repository.
 ## Formatting with `shfmt`
 It uses the built-in settings for formatting shell files. But to do so, `shfmt` tool must be installed. Go to `Editor -> Code Style -> Shell Script` and look for the `Shfmt formatter` section to install it.
 
-## TODO:
+# TODO
 
 - [ ] A bit of care to `bash` files
 - [ ] VIM configs based on https://github.com/amix/vimrc
 - [ ] SSH configs import
 - [ ] Custom VIM configs
-- [ ] Auto-enable `bash_it` aliases and plugins
 - [ ] Script to automatically install basic dotfiles (`basic.sh`)
 - [ ] Use [`dotdrop`](https://github.com/deadc0de6/dotdrop) for more configurations
