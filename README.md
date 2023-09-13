@@ -69,6 +69,11 @@ stow -D directory
 ```
 
 # Docs
+## Bash
+[A function exists](https://github.com/davidlj95/.files/blob/f553e2a4251c9e80be4dc4cae145933cc769c027/bash/.bash_profile#L102) to enable a selection of `bash-it` aliases and plugins
+
+For fonts in `powerline` theme to work, [install Powerline fonts](https://github.com/davidlj95/.files/blob/f553e2a4251c9e80be4dc4cae145933cc769c027/bash/.bash_profile#L15-L15)
+
 ## Shell
 The `shell` directory contains configurations that are shell-agnostic. Should work with `zsh` and `bash`. In order to load them, `bash` and `zsh` configs try to source those files if present.
 
