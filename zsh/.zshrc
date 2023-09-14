@@ -9,13 +9,16 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Would you like to use another custom folder than $ZSH/custom?
+# Moved here so we can load custom theme below
+ZSH_CUSTOM="$HOME/.zsh-custom"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # In case using IntelliJ IDE, use agnoster, seems something weird with p10k
-ZSH_CUSTOM="$ZSH/custom"
-if [ -d "$ZSH_CUSTOM/themes/powerlevel10k" ] && 
+if [ -d "$ZSH_CUSTOM/themes/powerlevel10k" ] &&
     [ -z "$INTELLIJ_ENVIRONMENT_READER"  ]; then
     ZSH_THEME="powerlevel10k/powerlevel10k"
 else
@@ -71,9 +74,6 @@ COMPLETION_WAITING_DOTS="true"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 HIST_STAMPS="yyyy-mm-dd"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Plugins configuration
 # # Bg notify
