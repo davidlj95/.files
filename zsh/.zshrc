@@ -17,8 +17,9 @@ ZSH_CUSTOM="$HOME/.zsh-custom"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# In case using IntelliJ IDE, use agnoster, seems something weird with p10k
 if [ -d "$ZSH_CUSTOM/themes/powerlevel10k" ] &&
+    # When IntelliJ IDE internally opens a terminal to read shell environment, seems something weird with p10k
+    # https://youtrack.jetbrains.com/articles/IDEA-A-19/Shell-Environment-Loading
     [ -z "$INTELLIJ_ENVIRONMENT_READER"  ]; then
     ZSH_THEME="powerlevel10k/powerlevel10k"
 else
