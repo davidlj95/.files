@@ -72,10 +72,17 @@ stow -D directory
 ## Bash
 [A function exists](https://github.com/davidlj95/.files/blob/f553e2a4251c9e80be4dc4cae145933cc769c027/bash/.bash_profile#L102) to enable a selection of `bash-it` aliases and plugins
 
-For fonts in `powerline` theme to work, [install Powerline fonts](https://github.com/davidlj95/.files/blob/f553e2a4251c9e80be4dc4cae145933cc769c027/bash/.bash_profile#L15-L15)
+For fonts in `powerline` theme to work, [install Powerline fonts][powerline-fonts]
+
+[powerline-fonts]: https://github.com/powerline/fonts
 
 ## Shell
 The `shell` directory contains configurations that are shell-agnostic. Should work with `zsh` and `bash`. In order to load them, `bash` and `zsh` configs try to source those files if present.
+
+## Zsh
+Comes with [Oh My Zsh](https://ohmyz.sh) configured, several plugins enabled & some custom plugins and themes (in [`zsh/.zsh-custom`](zsh/.zsh-custom)).
+
+To see fonts properly when using `powerlevel10k` (the configured theme), check [the guide on how to install them](https://github.com/romkatv/powerlevel10k#fonts). You can also use the [Powerline fonts][powerline-fonts] if you prefer something else than `Meslo` font. I've used it and works too.
 
 # Developing
 A Jetbrains IDE is used to manage the repository. 

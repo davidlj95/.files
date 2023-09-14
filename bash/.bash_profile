@@ -12,7 +12,7 @@ export BASH_IT="$HOME/.bash_it"
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
 # location /.bash_it/themes/
-# For fonts to work, install Powerline fonts: https://github.com/powerline/fonts
+# For fonts to work, install Powerline fonts (see README.md)
 export BASH_IT_THEME='powerline'
 
 # Some themes can show whether `sudo` has a current token or not.
