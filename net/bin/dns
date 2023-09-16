@@ -1,0 +1,203 @@
+#!/bin/sh
+#
+# Manages the DNS servers for the specified interface
+# Prepared for macOs
+OP_GET="get"
+OP_SET="set"
+DEFAULT_NAMESERVERS="default"
+DEFAULT_INTERFACE_FILE="$HOME/.config/dns-default-interface"
+ALIAS_GOOGLE="google"
+ALIAS_GOOGLE_NAMESERVERS="8.8.8.8 8.8.4.4"
+ALIASES="$ALIAS_GOOGLE"
+
+# Helpers
+show_help() {
+  echo "Gets or sets the DNS nameservers to use in the specified interface"
+  echo ""
+  echo "Usage:"
+  echo "$0 $OP_GET [-i | --interface <name>]"
+  echo "$0 $OP_SET [-i | --interface <name>] (<nameserver>...|$DEFAULT_NAMESERVERS|alias)"
+  echo ""
+  echo "Options:"
+  echo "    -i, --interface <name>"
+  echo "        Interface name to set DNS servers. Can be omitted if a default one is set"
+  echo "        in the configuration file '$DEFAULT_INTERFACE_FILE'"
+  echo ""
+  echo "Aliases:"
+  echo "    When setting DNS nameservers, you can use an alias instead of typing the IP addresses"
+  echo "    Current accepted aliases: $ALIASES"
+  echo "     - Google nameservers: $ALIAS_GOOGLE_NAMESERVERS"
+  echo ""
+  echo "Example:"
+  echo "    List nameservers for Wi-Fi interface"
+  echo "        $0 get -i Wi-Fi"
+  echo "    Use Google nameservers for Wi-Fi interface using their IPs"
+  echo "        $0 set -i Wi-Fi 8.8.8.8 8.8.4.4"
+  echo "    Use Google nameservers for Wi-Fi interface using the alias"
+  echo "        $0 set -i Wi-Fi google"
+  echo "    Use default (DHCP) nameservers for Wi-Fi interface"
+  echo "        $0 set -i Wi-Fi $DEFAULT_NAMESERVERS"
+  echo "    Configure Wi-Fi as default interface and use a shorter command"
+  echo "        echo 'Wi-Fi' > '$DEFAULT_INTERFACE_FILE'"
+  echo "        $0 get # lists nameservers of 'Wi-Fi' interface"
+}
+show_error() {
+  echo >&2 "❌ " "$@"
+}
+show_error_and_exit() {
+  show_error "$@"
+  exit 1
+}
+show_info() {
+  echo "ℹ️" "$@"
+}
+show_item() {
+  echo "    - $*"
+}
+show_success() {
+  echo "✅ " "$@"
+}
+
+# Just macOs
+if [ "$(uname)" != "Darwin" ]; then
+  show_error_and_exit "Script can only run in macOs (for now?)"
+fi
+
+# Empty args
+interface=""
+nameservers=""
+
+# Operation mode
+op="$1"
+if [ "$op" != "$OP_GET" ] && [ "$op" != "$OP_SET" ]; then
+  show_error_and_exit "First argument must be either '$OP_GET' or '$OP_SET'"
+fi
+shift
+
+# Parse args
+while [ $# -gt 0 ]; do
+  case "$1" in
+  -h | -\? | --help)
+    show_help
+    exit 0
+    ;;
+  -i | --interface)
+    interface="$2"
+    if [ -z "$interface" ]; then
+      show_error_and_exit "Interface must be provided after interface option"
+    fi
+    shift
+    shift
+    ;;
+  *)
+    if [ "$op" = "$OP_GET" ]; then
+      show_error_and_exit "No args accepted when retrieving info (extra args: '$*')"
+    fi
+    if [ "$op" = "$OP_SET" ]; then
+      nameserver="$1"
+      # Using default + other nameservers
+      if [ -n "$nameservers" ] && [ "$nameserver" = "$DEFAULT_NAMESERVERS" ]; then
+        show_error_and_exit "Can't combine setting to default nameservers with other nameservers"
+      fi
+      for alias in $ALIASES; do
+        if [ -n "$nameservers" ] && [ "$nameserver" = "$alias" ]; then
+          show_error_and_exit "Can't combine setting to $alias nameservers with other nameservers"
+        fi
+      done
+      if [ -z "$nameservers" ]; then
+        nameservers="$nameserver"
+      else
+        nameservers="$nameservers $nameserver"
+      fi
+      shift
+    fi
+    ;;
+  esac
+done
+
+# Ensure all set
+if [ -z "$interface" ]; then
+  # Try load interface from config
+  if [ -f "$DEFAULT_INTERFACE_FILE" ] && [ -r "$DEFAULT_INTERFACE_FILE" ] &&
+    [ -s "$DEFAULT_INTERFACE_FILE" ]; then
+    interface="$(cat "$DEFAULT_INTERFACE_FILE")"
+    show_info "Using default interface '$interface'"
+  else
+    show_error_and_exit "No interface specified"
+  fi
+fi
+
+# Ensure interface is valid
+available_interfaces="$(networksetup -listallnetworkservices | tail -n+2)"
+if ! echo "$available_interfaces" | grep -q "$interface"; then
+  show_error "Interface doesn't exist"
+  show_info "Available available_interfaces:"
+  echo "$available_interfaces" | while read -r available_interface; do
+    show_item "$available_interface"
+  done
+fi
+
+get_op() {
+  nameservers="$(networksetup -getdnsservers "$interface")"
+  if echo "$nameservers" | grep -q "There aren't any DNS Servers set on"; then
+    show_info "No nameservers manually set"
+    show_info "Resolved ones:"
+    nameservers="$(scutil --dns | grep 'nameserver' | cut -d: -f2 | sort -u | xargs)"
+  else
+    show_info "Nameservers manually set:"
+  fi
+  for nameserver in $nameservers; do
+    show_item "$nameserver"
+  done
+}
+
+set_op() {
+  if [ -z "$nameservers" ]; then
+    show_error_and_exit "No nameservers specified"
+  fi
+
+  # Default nameserver
+  DEFAULT_ARG="empty"
+  if [ "$nameservers" = "$DEFAULT_NAMESERVERS" ]; then
+    # "empty" as argument to "networksetup -setdnsservers" means default
+    nameservers="$DEFAULT_ARG"
+  else
+    # Resolve alias
+    if [ "$ALIAS_GOOGLE" = "$nameservers" ]; then
+      nameservers="$ALIAS_GOOGLE_NAMESERVERS"
+    fi
+
+    # Ensure nameservers are valid
+    for nameserver in $nameservers; do
+      # https://stackoverflow.com/a/13778973/3263250
+      if ! expr "$nameserver" : '[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*$' >/dev/null; then
+        show_error_and_exit "Nameserver '${nameserver}' is not a valid dotted decimal IPv4 address"
+      fi
+    done
+  fi
+
+  # Apply change
+  # shellcheck disable=SC2086
+  networksetup -setdnsservers "$interface" $nameservers
+  if [ "$nameservers" = "$DEFAULT_ARG" ]; then
+    show_success "Changed nameservers of interface '$interface' to default"
+  else
+    show_success "Changed nameservers of interface '$interface' to"
+    for nameserver in $nameservers; do
+      show_item "$nameserver"
+    done
+  fi
+}
+
+# Run action
+case "$op" in
+"$OP_GET")
+  get_op
+  ;;
+"$OP_SET")
+  set_op
+  ;;
+*)
+  show_error_and_exit "Unknown operation to perform '$op'"
+  ;;
+esac
