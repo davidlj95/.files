@@ -95,7 +95,6 @@ It uses the built-in settings for formatting shell files. But to do so, `shfmt` 
 
 # TODO
 
-- [ ] A bit of care to `bash` files
 - [ ] VIM configs based on https://github.com/amix/vimrc
 - [ ] SSH configs import
 - [ ] Custom VIM configs
