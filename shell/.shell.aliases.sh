@@ -55,17 +55,18 @@ alias createdb="createdb --host localhost -U postgres"
 
 # External IP address
 # https://unix.stackexchange.com/a/81699/37512
-alias wanip='dig @resolver4.opendns.com myip.opendns.com +short' 
+alias wanip='dig @resolver4.opendns.com myip.opendns.com +short'
 alias wanip4='dig @resolver4.opendns.com myip.opendns.com +short -4'
 alias wanip6='dig @resolver1.ipv6-sandbox.opendns.com AAAA myip.opendns.com +short -6'
 
 # Graphite aliases
-alias gtbc='gt branch checkout'
-alias gtbcr='gt branch create'
+alias gtc='gt checkout'
+alias gtcr='gt create'
+alias gtg='gt get'
 alias gtlo='gt log'
 alias gtsl='gt log short'
-alias gtres='gt repo sync --restack'
-alias gtss='gt stack submit'
+alias gtsy='gt sync'
+alias gtsu='gt submit'
 
 # Shred
 alias srm="shred -un 42"
