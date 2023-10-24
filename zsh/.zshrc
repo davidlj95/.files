@@ -103,6 +103,7 @@ plugins=(
     archlinux
     aws
     bgnotify
+    brew
     bundler
     common-aliases
     colored-man-pages
