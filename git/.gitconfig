@@ -1,14 +1,13 @@
 [user]
 	email = mail@davidlj95.com
 	name = "David LJ"
-	signingKey = "0x5DE6AC64"
+	signingKey = 1441FA435DE6AC64
 [commit]
     gpgSign = true
 
 [init]
 	defaultBranch = main
 [credential "https://github.com"]
-	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
@@ -20,3 +19,6 @@
 	required = true
 [push]
 	autoSetupRemote = true
+[diff "lockb"]
+	textconv = bun
+	binary = true
