@@ -6,14 +6,26 @@ const personalBrowser = {
     name: "Google Chrome",
     profile: "Default"
 };
+const gitHubApp = ({urlString}) => ({
+    name: "Google Chrome",
+    profile: "Default",
+    args: [
+        `--app-id=mjoklplbddabcmpepnokjaffbmgbkkgg`,
+        `--app-launch-url-for-shortcuts-menu-item=${urlString}`,
+    ],
+})
 
 module.exports = {
     defaultBrowser: "Google Chrome",
     handlers: [
         {
+            match: ({url}) => url.host.endsWith("github.com"),
+            browser: gitHubApp,
+        },
+        {
             match: ({url}) => url.host.endsWith("notion.so"),
             browser: {
-                name: "Notion"
+                name: "Notion",
             },
         },
         {
