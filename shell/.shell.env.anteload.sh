@@ -65,8 +65,8 @@ if directory_exists_and_is_readable "$fvm_home_dir"; then
 fi
 
 # Java: SDKMAN!
-sdkman_dir="$sdkman_default_dir"
 sdkman_default_dir="$HOME/.sdkman" # https://sdkman.io/install
+sdkman_dir="$sdkman_default_dir"
 if [ -d "$sdkman_dir" ]; then
   # Init
   source_if_file_exists_and_is_readable "$sdkman_dir/bin/sdkman-init.sh"
