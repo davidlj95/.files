@@ -50,6 +50,7 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     context                   # user@host
     dir                       # current directory
+    dir_writable              # lock icon if can't write to pwd
     vcs                       # git status
     command_execution_time    # previous command duration
     virtualenv                # python virtual environment
