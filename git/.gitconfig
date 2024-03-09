@@ -22,3 +22,7 @@
 [diff "lockb"]
 	textconv = bun
 	binary = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
