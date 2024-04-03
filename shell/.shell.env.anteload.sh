@@ -3,7 +3,7 @@
 #
 # Aimed to be shell independent
 #
-# Tested in zsh (though this was started using bash)
+# Tested by dogfooding in zsh (though this was started using bash)
 
 # Constants
 export USER_APPS_DIR="$HOME/app"
