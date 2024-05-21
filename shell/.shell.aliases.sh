@@ -79,3 +79,19 @@ alias npm="corepack npm"
 
 # GitHub aliases
 alias gh-cache-clean="gh cache list --json id --jq '.[].id' | tee | xargs -L 1 gh cache delete"
+
+# Magic is coming 🪄
+function ai() {
+    ollama_pid="$(pgrep ollama)"
+    if [ -z "$ollama_pid" ]; then
+        echo "🦙 Waking up (o)llama"
+        (ollama serve >/dev/null 2>&1 &)
+        printf "⏳ Waiting for server to be ready.."
+        until curl --output /dev/null --silent --head --fail http://localhost:11434; do
+            printf '.'
+            sleep 1
+        done
+        printf "\n"
+    fi
+    sgpt -s "$*"
+}
