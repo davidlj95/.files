@@ -82,16 +82,36 @@ alias gh-cache-clean="gh cache list --json id --jq '.[].id' | tee | xargs -L 1 g
 
 # Magic is coming 🪄
 function ai() {
+    # Use OpenAI if can connect
+    if ping -c 1 api.openai.com &> /dev/null; then
+        echo "🛜  OpenAI connectivity success"
+        oai "$*"
+        return
+    fi
+    # Use local ollama if offline
+    echo "📵 No connectivity to OpenAI"
+    lai "$*"
+}
+
+function oai() {
+    OPENAI_MODEL="gpt-4o-2024-05-13"
+    echo "⚙️  Using $OPENAI_MODEL"
+    sgpt --model "$OPENAI_MODEL" -s "$*"
+}
+
+function lai() {
+    OLLAMA_MODEL="ollama/llama3:instruct"
+    echo "⚙️  Using $OLLAMA_MODEL"
     ollama_pid="$(pgrep ollama)"
     if [ -z "$ollama_pid" ]; then
-        echo "🦙 Waking up (o)llama"
+        echo "🦙 Waking up (o)llama first"
         (ollama serve >/dev/null 2>&1 &)
-        printf "⏳ Waiting for server to be ready.."
+        printf "⏳ Waiting for server.."
         until curl --output /dev/null --silent --head --fail http://localhost:11434; do
             printf '.'
             sleep 1
         done
         printf "\n"
     fi
-    sgpt -s "$*"
+    sgpt --model "$OLLAMA_MODEL" -s "$*"
 }
