@@ -191,5 +191,12 @@ if directory_exists_and_is_readable "$spring_home"; then
   prepend_to_path "$spring_home/bin"
 fi
 
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+if directory_exists_and_is_readable "$PNPM_HOME"; then
+  prepend_to_path "$PNPM_HOME"
+fi
+# pnpm end
+
 ## X. Overrides specific to this machine
 source_if_file_exists_and_is_readable "$HOME/.shell.env.anteload.overrides.sh"
