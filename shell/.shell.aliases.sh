@@ -79,6 +79,7 @@ alias npm="corepack npm"
 
 # GitHub aliases
 alias gh-cache-clean="gh cache list --json id --jq '.[].id' | tee | xargs -L 1 gh cache delete"
+alias ghpc="gh pr create"
 
 # Magic is coming 🪄
 function ai() {
