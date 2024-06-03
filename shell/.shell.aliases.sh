@@ -5,18 +5,18 @@
 # Git
 alias gblp=git-branch-list-prunables
 
-# Git branch prune
-# Remove local branches that are tracked remotely
-# but remote branch doesn't exit anymore
+## Git branch prune
+## Remove local branches that are tracked remotely
+## but remote branch doesn't exit anymore
 alias gbp="gblp | xargs git branch -D"
 
-# Push and copy commit id of pushed thing
+## Push and copy commit id of pushed thing
 alias gli="git log --format='%H' -n 1 | pbcopy"
 
-# Uncommit last commit, so you can commit again
+## Uncommit last commit, so you can commit again
 alias gunc="git reset --soft HEAD~"
 
-# # Git flow
+# Git flow
 alias gfli="git flow init"
 alias gflfs="git flow feature start"
 alias gflff="git flow feature finish"
