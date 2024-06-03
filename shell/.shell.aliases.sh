@@ -22,6 +22,12 @@ alias gflfs="git flow feature start"
 alias gflff="git flow feature finish"
 alias gflfp="git flow feature publish"
 
+# Gitignore
+# Outputs basic files to ignore
+# Usage: `gi $(gib),angular,lighthouse` (uses `gi` alias from oh-my-zsh plugin)
+alias gib="echo macos,linux,windows,vim,visualstudiocode,jetbrains+iml"
+
+
 # Clipboard
 alias clipcopy="xsel --clipboard"
 
