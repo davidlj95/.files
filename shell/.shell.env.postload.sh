@@ -13,14 +13,6 @@ command_without_completions_exists() {
 # Tabtab
 get_tabtab_scripts() {
   shell_name="$(basename "$SHELL")"
-  # Can be at "~/.config/tabtab/{shell}/__tabtab.{shell_ext} for pnpm tabtab
-  # https://github.com/pnpm/tabtab/blob/v0.5.2/lib/installer.js#L189-L193
-  # To support PowerShell, extension should be different
-  # https://github.com/pnpm/tabtab/blob/v0.5.2/lib/constants.js#L21
-  pnpm_tabtab_script="$HOME/.config/tabtab/${shell_name}/__tabtab.${shell_name}"
-  if [ -f "$pnpm_tabtab_script" ]; then
-    echo "$pnpm_tabtab_script"
-  fi
   # Can be at "~/.config/tabtab/__tabtab.{shell_ext}" for v3
   # https://github.com/mklabs/tabtab/blob/v3.0.3/lib/installer.js#L218
   # In that version, extension == shell, so we're good here. Maybe PowerShell not supported though
@@ -53,6 +45,28 @@ if command_exists compdef; then
   if command_without_completions_exists gt; then
     # shellcheck disable=SC1090
     source <(gt completion)
+  fi
+
+  # Pnpm
+  # For v9.x, snippet via "pnpm completions zsh". Slightly modified
+  if command_without_completions_exists pnpm; then
+    _pnpm_completion() {
+      local reply
+      local si=$IFS
+
+      # In pnpm we trust
+      # shellcheck disable=SC2207
+      IFS=$'\n' reply=($(COMP_CWORD="$((CURRENT - 1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" SHELL=zsh pnpm completion-server -- "${words[@]}"))
+      IFS=$si
+
+      # shellcheck disable=SC2128
+      if [ "$reply" = "__tabtab_complete_files__" ]; then
+        _files
+      else
+        _describe 'values' reply
+      fi
+    }
+    compdef _pnpm_completion pnpm
   fi
 fi
 
