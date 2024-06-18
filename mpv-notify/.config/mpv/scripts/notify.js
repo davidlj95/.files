@@ -5,14 +5,16 @@ var lastNotifiedTitle = null;
 
 // Loads the plugin, called at end of file
 function load() {
-  var terminalNotifierExists = mp.command_native({
-    name: "subprocess",
-    args: [TERMINAL_NOTIFIER, "-version"],
-    capture_stdout: true,
-    playback_only: false,
-  });
+  if (!ensureTerminalNotifierExists()) return;
 
-  if (terminalNotifierExists.status !== 0) {
+  registerHooks();
+
+  mp.msg.info("Notify plugin loaded");
+}
+
+function ensureTerminalNotifierExists() {
+  var terminalNotifierVersion = getTerminalNotifierVersion();
+  if (!terminalNotifierVersion) {
     mp.msg.error(TERMINAL_NOTIFIER + " can't be found");
     mp.msg.info("Install it and try again");
     mp.msg.info(
@@ -20,10 +22,31 @@ function load() {
     );
     return;
   }
-  mp.msg.debug("Using " + terminalNotifierExists.stdout.trim());
+
+  mp.msg.debug("Using " + terminalNotifierVersion);
+  return true;
+}
+
+function getTerminalNotifierVersion() {
+  var terminalNotifierExists = mp.command_native({
+    name: "subprocess",
+    args: [TERMINAL_NOTIFIER, "-version"],
+    capture_stdout: true,
+    playback_only: false,
+    // 👆 IMPORTANT
+    // Otherwise will exit with failure status
+    // as will be cancelled if running when not playing.
+    // Like on start before file has loaded.
+  });
+  if (terminalNotifierExists.status !== 0) {
+    return;
+  }
+  return terminalNotifierExists.stdout.trim();
+}
+
+function registerHooks() {
   mp.register_event("file-loaded", notifyCurrentTrack);
   mp.observe_property("metadata", null, notifyCurrentTrack);
-  mp.msg.info("Notify plugin loaded");
 }
 
 // Callback when metadata is updated
