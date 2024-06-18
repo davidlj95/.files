@@ -1,3 +1,3 @@
 #!/bin/sh
 # vim: syntax=sh
-echo "http://flaixfmmob.streaming-pro.com:8002"
+echo "https://stream.flaixfm.cat/icecast"
