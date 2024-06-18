@@ -1,30 +1,34 @@
 #!/bin/sh
 # vim: syntax=sh
+set -eu
 
 cmd_exists() {
-    which "$1" > /dev/null 2>&1
+    which "$1" >/dev/null 2>&1
 }
 
-## First, mplayer!
-if cmd_exists mplayer; then
-    mplayer "$(flaixfm-url)" "$@"
-    exit 0
+# Lookup URL
+lookup_cmd="flaixfm-url"
+if ! cmd_exists "$lookup_cmd"; then
+    >&2 echo "❌ $lookup_cmd command doesn't exist"
+    false
 fi
+stream_url="$(flaixfm-url)"
+if [ -z "$stream_url" ]; then
+    >&2 echo "❌ Stream URL obtained via $lookup_cmd cmd is empty"
+    false
+fi
+>&2 echo "ℹ️  Stream URL: '$stream_url'"
 
-## Otherwise, try mpv
-## As for instance, no mplayer in macOS :(
-## https://mplayerosx.ch has been retired
+# Try apps to play stream URL
+## mpv
 if cmd_exists mpv; then
-    mpv "$(flaixfm-url)" "$@"
-    exit 0
+    >&2 echo "ℹ️  Using mpv as player"
+    mpv "$stream_url" "$@"
+## VLC as fallback
+elif cmd_exists vlc; then
+    >&2 echo "ℹ️  Using vlc as player"
+    vlc "$stream_url" "$@" &
+else
+    >&2 echo "❌ No app found to open the URL"
+    false
 fi
-
-
-## Final try with vlc
-if cmd_exists vlc; then
-    vlc "$(flaixfm-url)" "$@" &
-    exit 0
-fi
-
->&2 echo "No app found to open the URL"
-flaixfm-url
