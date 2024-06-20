@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+directory="$1"
+
+domain="com.apple.screencapture"
+key="location"
+
+# Read if no directory provided
+if [ -z "$directory" ]; then
+  defaults read "$domain" "$key"
+  exit 0
+fi
+
+# Directory exists
+if ! [ -d "$directory" ]; then
+  >&2 echo "❌  Not a directory: '$directory'"
+  exit 1
+fi
+
+# Write
+defaults write "$domain" "$key" "$directory"
+
