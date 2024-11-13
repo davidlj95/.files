@@ -73,6 +73,9 @@ alias gtlo='gt log'
 alias gtsl='gt log short'
 alias gtsy='gt sync'
 alias gtsu='gt submit'
+alias gtsus='gt submit --stack'
+alias gtre='gt restack'
+alias gtreu='gt restack --upstack'
 
 # Shred
 alias srm="shred -un 42"
