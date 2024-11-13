@@ -126,7 +126,7 @@ function notify(title) {
     "-message",
     title,
     "-contentImage",
-    "/Users/davidlj95/Documents/flaixfm-squared.svg",
+    "/Users/davidlj95/Pictures/var/flaixfm-squared.svg",
     "-open",
     "https://open.spotify.com/search/" + title,
   ]);
