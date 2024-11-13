@@ -114,6 +114,7 @@ plugins=(
     docker-compose
     dotenv
     emoji
+    gh
     git
     git-extras
     git-flow-avh
