@@ -134,3 +134,6 @@ function lai() {
     fi
     sgpt --model "$OLLAMA_MODEL" -s "$*"
 }
+
+# SSH
+alias sshg="ssh -i ~/.ssh/id_github"
