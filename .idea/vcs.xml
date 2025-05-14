@@ -2,5 +2,15 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/bash/.bash_it" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/bash/.bash_it/test_lib/bats-assert" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/bash/.bash_it/test_lib/bats-core" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/bash/.bash_it/test_lib/bats-file" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/bash/.bash_it/test_lib/bats-support" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/zsh/.oh-my-zsh" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/zsh/.zsh-custom/plugins/zsh-autosuggestions" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/zsh/.zsh-custom/plugins/zsh-completions" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/zsh/.zsh-custom/plugins/zsh-syntax-highlighting" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/zsh/.zsh-custom/themes/powerlevel10k" vcs="Git" />
   </component>
 </project>
