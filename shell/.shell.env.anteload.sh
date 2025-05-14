@@ -198,5 +198,11 @@ if directory_exists_and_is_readable "$PNPM_HOME"; then
 fi
 # pnpm end
 
+# OrbStack
+orbstack_dir="$HOME/.orbstack"
+if directory_exists_and_is_readable "$orbstack_dir"; then
+  source_if_file_exists_and_is_readable "$orbstack_dir/shell/init.zsh" 2>/dev/null
+fi
+
 ## X. Overrides specific to this machine
 source_if_file_exists_and_is_readable "$HOME/.shell.env.anteload.overrides.sh"
