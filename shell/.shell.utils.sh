@@ -26,7 +26,7 @@ completions_exist_for() {
 
 source_if_file_exists_and_is_readable() {
   # shellcheck disable=SC1090
-  [ -r "$1" ] && [ -d "$1" ] && source "$1"
+  [ -r "$1" ] && source "$1"
 }
 
 is_mac_os() {
