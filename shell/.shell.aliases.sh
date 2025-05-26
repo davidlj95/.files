@@ -99,41 +99,5 @@ alias ghpre="gh pr edit"
 alias ghprd="gh pr ready --undo"
 alias ghrvw="gh repo view --web"
 
-# Magic is coming 🪄
-function ai() {
-    # Use OpenAI if can connect
-    if ping -c 1 api.openai.com &> /dev/null; then
-        echo "🛜  OpenAI connectivity success"
-        oai "$*"
-        return
-    fi
-    # Use local ollama if offline
-    echo "📵 No connectivity to OpenAI"
-    lai "$*"
-}
-
-function oai() {
-    OPENAI_MODEL="gpt-4o-2024-05-13"
-    echo "⚙️  Using $OPENAI_MODEL"
-    sgpt --model "$OPENAI_MODEL" -s "$*"
-}
-
-function lai() {
-    OLLAMA_MODEL="ollama/llama3:instruct"
-    echo "⚙️  Using $OLLAMA_MODEL"
-    ollama_pid="$(pgrep ollama)"
-    if [ -z "$ollama_pid" ]; then
-        echo "🦙 Waking up (o)llama first"
-        (ollama serve >/dev/null 2>&1 &)
-        printf "⏳ Waiting for server.."
-        until curl --output /dev/null --silent --head --fail http://localhost:11434; do
-            printf '.'
-            sleep 1
-        done
-        printf "\n"
-    fi
-    sgpt --model "$OLLAMA_MODEL" -s "$*"
-}
-
 # SSH
 alias sshg="ssh -i ~/.ssh/id_github"
