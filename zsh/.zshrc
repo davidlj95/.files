@@ -141,6 +141,7 @@ plugins=(
     zsh-autosuggestions
     # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh
     zsh-syntax-highlighting
+    mvn
 )
 
 utils_file="$HOME/.shell.utils.sh"
