@@ -4,6 +4,12 @@
 #
 # Tested by dogfooding in zsh (though this was started using bash)
 
+# Aliases
+aliases_file="$HOME/.shell.aliases.sh"
+source_if_file_exists_and_is_readable "$aliases_file"
+custom_aliases_file="$HOME/.shell.custom.aliases.sh"
+source_if_file_exists_and_is_readable "$custom_aliases_file"
+
 # Utils
 command_without_completions_exists() {
   command_exists "$1" && ! completions_exist_for "$1"

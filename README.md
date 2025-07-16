@@ -79,6 +79,8 @@ For fonts in `powerline` theme to work, [install Powerline fonts][powerline-font
 ## Shell
 The `shell` directory contains configurations that are shell-agnostic. Should work with `zsh` and `bash`. In order to load them, `bash` and `zsh` configs try to source those files if present.
 
+You may define your custom aliases just for that machine by creating a  `.shell.custom.aliases.sh` file in your home directory. Aliases will be defined after the shell framework is loaded.
+
 ## Zsh
 Comes with [Oh My Zsh](https://ohmyz.sh) configured, several plugins enabled & some custom plugins and themes (in [`zsh/.zsh-custom`](zsh/.zsh-custom)).
 

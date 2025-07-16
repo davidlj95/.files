@@ -87,8 +87,6 @@ if [ -r "$utils_file" ]; then
     source "$utils_file"
     [ -r "$env_anteload_file" ] && source "$env_anteload_file"
 fi
-aliases_file="$HOME/.shell.aliases.sh"
-[ -r "$aliases_file" ] && source "$aliases_file"
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
