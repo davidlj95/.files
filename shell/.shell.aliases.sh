@@ -83,9 +83,6 @@ alias srm="shred -un 42"
 # Tailscale for macOs
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
-# Corepack force
-alias npm="corepack npm"
-
 # GitHub aliases
 alias gh-cache-clean="gh cache list --json id --jq '.[].id' | tee | xargs -L 1 gh cache delete"
 alias ghprc="gh pr create"
