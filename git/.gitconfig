@@ -26,3 +26,7 @@
 	ui = auto
 [branch]
 	sort = -committerdate
+
+# Machine-specific configuration
+[include]
+	path = ~/.gitconfig.local
