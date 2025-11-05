@@ -1,0 +1,6 @@
+// For more information about this file, see
+// https://github.com/JetBrains/ideavim/blob/master/README.md
+// https://github.com/JetBrains/ideavim/blob/master/doc/sethandler.md
+
+// Control + R means run in all modes
+sethandler <C-R> a:ide
